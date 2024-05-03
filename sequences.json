@@ -10,5 +10,17 @@
     {
         "if": "self.type == _w.FIIL",
         "seq": ["_o.OLUMSUZLUK", "_t", "_p"]
+    },
+    {
+        "if": "self.type == _w.FIIL",
+        "seq": ["_c.BIRLESIKFIIL", "_o.OLUMSUZLUK", "_t", "_p"]
+    },
+    {
+        "if": "self.type == _w.FIIL",
+        "seq": ["_c.BIRLESIKFIIL", "_o.OLUMSUZLUK", "_c.YETERLILIK", "_t", "_p"]
+    },
+    {
+        "if": "self.type == _w.FIIL",
+        "seq": ["_o.OLUMSUZLUK", "_c.YETERLILIK", "_t", "_p"]
     }
 ]

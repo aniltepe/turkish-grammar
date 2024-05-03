@@ -1,0 +1,13 @@
+[
+    {
+        "id": "simdiki_zaman_1",
+        "type": "_t.SIMDIKI1",
+        "conditions": [
+            {"op": "_c.EQUAL", "op1": "eval(_r['word_type'])", "op2": "_w.FIIL"},
+            {"op": "_c.SUBSET", "op1": "[_a.SESLI, _a.DAR]", "op2": "eval(_r['last_letter_tags'])"}
+        ],
+        "actions": [
+            {"type": "_o.ADD", "op1": "yor"}
+        ]
+    }
+]

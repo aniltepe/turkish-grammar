@@ -1,0 +1,640 @@
+[
+    {
+        "id": "simdiki_zaman_yor_1",
+        "type": "SIMDIKI_YOR",
+        "if": [
+            "self.type == _w.FIIL",
+            "self.check_applied(['SIMDIKI_YOR', 'SIMDIKI_MAKTA'], 'allnotin')",
+            "CHECK_LETTER(self.letters[-1], [_l.SESLI, _l.DAR])"
+        ],
+        "do": [
+            "self.append([_a['y'], _a['o'], _a['r']], 'SIMDIKI_YOR')"
+        ]
+    },
+    {
+        "id": "simdiki_zaman_yor_2",
+        "type": "SIMDIKI_YOR",
+        "if": [
+            "self.type == _w.FIIL",
+            "self.check_applied(['SIMDIKI_YOR', 'SIMDIKI_MAKTA'], 'allnotin')",
+            "CHECK_LETTER(self.letters[-1], [_l.SESSIZ])"
+        ],
+        "do": [
+            "self.append(FIND_LETTERS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.GENIS, _l.DAR)) + [_a['y'], _a['o'], _a['r']], 'SIMDIKI_YOR')"
+        ]
+    },
+    {
+        "id": "simdiki_zaman_yor_3",
+        "type": "SIMDIKI_YOR",
+        "if": [
+            "self.type == _w.FIIL",
+            "self.check_applied(['SIMDIKI_YOR', 'SIMDIKI_MAKTA'], 'allnotin')",
+            "CHECK_LETTER(self.letters[-1], [_l.SESLI, _l.DUZ, _l.GENIS])",
+            "len(self.vowels) >= 2"
+        ],
+        "do": [
+            "self.replace(len(self.letters) - 1, FIND_LETTERS(REPLACE_TAGS(self.vowels[-2]['tags'], _l.GENIS, _l.DAR))[0], 'UNLUDARALMASI')",
+            "self.append([_a['y'], _a['o'], _a['r']], 'SIMDIKI_YOR')"
+        ]
+    },
+    {
+        "id": "simdiki_zaman_yor_4",
+        "type": "SIMDIKI_YOR",
+        "if": [
+            "self.type == _w.FIIL",
+            "self.check_applied(['SIMDIKI_YOR', 'SIMDIKI_MAKTA'], 'allnotin')",
+            "CHECK_LETTER(self.letters[-1], [_l.SESLI, _l.DUZ, _l.GENIS])",
+            "len(self.vowels) == 1"
+        ],
+        "do": [
+            "self.replace(len(self.letters) - 1, _a['i'], 'UNLUDARALMASI')",
+            "self.append([_a['y'], _a['o'], _a['r']], 'SIMDIKI_YOR')"
+        ]
+    },
+    {
+        "id": "simdiki_zaman_makta",
+        "type": "SIMDIKI_MAKTA",
+        "if": [
+            "self.type == _w.FIIL",
+            "self.check_applied(['SIMDIKI_YOR', 'SIMDIKI_MAKTA'], 'allnotin')"
+        ],
+        "do": [
+            "self.append([_a['m']] + FIND_LETTERS(REPLACE_TAGS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.YUVARLAK, _l.DUZ), _l.DAR, _l.GENIS)) + [_a['k'], _a['t']] + FIND_LETTERS(REPLACE_TAGS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.YUVARLAK, _l.DUZ), _l.DAR, _l.GENIS)), 'SIMDIKI_MAKTA')"
+        ]
+    },
+    {
+        "id": "gelecek_zaman_1",
+        "type": "GELECEK",
+        "if": [
+            "self.type == _w.FIIL",
+            "self.check_applied(['GELECEK'], 'allnotin')",
+            "CHECK_LETTER(self.letters[-1], [_l.SESSIZ])"
+        ],
+        "do": [
+            "self.append(FIND_LETTERS(REPLACE_TAGS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.YUVARLAK, _l.DUZ), _l.DAR, _l.GENIS)) + [_a['c']] + FIND_LETTERS(REPLACE_TAGS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.YUVARLAK, _l.DUZ), _l.DAR, _l.GENIS)) + [_a['k']], 'GELECEK')"
+        ]
+    },
+    {
+        "id": "gelecek_zaman_2",
+        "type": "GELECEK",
+        "if": [
+            "self.type == _w.FIIL",
+            "self.check_applied(['GELECEK'], 'allnotin')",
+            "(CHECK_LETTER(self.letters[-1], [_l.SESLI, _l.KALIN]) or (CHECK_LETTER(self.letters[-1], [_l.SESLI, _l.INCE]) and len(self.vowels) >= 2))"
+        ],
+        "do": [
+            "self.append([_a['y']], 'KAYNASTIRMA')",
+            "self.append(FIND_LETTERS(REPLACE_TAGS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.YUVARLAK, _l.DUZ), _l.DAR, _l.GENIS)) + [_a['c']] + FIND_LETTERS(REPLACE_TAGS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.YUVARLAK, _l.DUZ), _l.DAR, _l.GENIS)) + [_a['k']], 'GELECEK')"
+        ]
+    },
+    {
+        "id": "gelecek_zaman_3",
+        "type": "GELECEK",
+        "if": [
+            "self.type == _w.FIIL",
+            "self.check_applied(['GELECEK'], 'allnotin')",
+            "CHECK_LETTER(self.letters[-1], [_l.SESLI, _l.INCE])",
+            "len(self.vowels) == 1"
+        ],
+        "do": [
+            "self.replace(len(self.letters) - 1, _a['i'], 'UNLUDARALMASI')",
+            "self.append([_a['y']], 'KAYNASTIRMA')",
+            "self.append([_a['e'], _a['c'], _a['e'], _a['k']], 'GELECEK')"
+        ]
+    },
+    {
+        "id": "genis_zaman_1",
+        "type": "GENIS",
+        "if": [
+            "self.type == _w.FIIL",
+            "self.check_applied(['GENIS'], 'allnotin')",
+            "CHECK_LETTER(self.letters[-1], [_l.SESLI])",
+            "self.applied[-1]['code'] not in ['OLUMSUZLUK', 'IMKANSIZLIK']"
+        ],
+        "do": [
+            "self.append([_a['r']], 'GENIS')"
+        ]
+    },
+    {
+        "id": "genis_zaman_2",
+        "type": "GENIS",
+        "if": [
+            "self.type == _w.FIIL",
+            "self.check_applied(['GENIS'], 'allnotin')",
+            "CHECK_LETTER(self.letters[-1], [_l.SESSIZ])",
+            "(not(self.word().endswith('et')) or self.word() == 'üret')",
+            "len(self.vowels) >= 2",
+            "self.applied[-1]['code'] not in ['OLUMSUZLUK', 'IMKANSIZLIK']"
+        ],
+        "do": [
+            "self.append(FIND_LETTERS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.GENIS, _l.DAR)) + [_a['r']], 'GENIS')"
+        ]
+    },
+    {
+        "id": "genis_zaman_3",
+        "type": "GENIS",
+        "if": [
+            "self.type == _w.FIIL",
+            "self.check_applied(['GENIS'], 'allnotin')",
+            "CHECK_LETTER(self.letters[-1], [_l.SESSIZ])",
+            "(len(self.vowels) == 1 or (self.word().endswith('et') and self.word() != 'üret'))",
+            "self.letters[-1]['lower'] not in ['l', 'n', 'r']",
+            "self.applied[-1]['code'] not in ['OLUMSUZLUK', 'IMKANSIZLIK']"
+        ],
+        "do": [
+            "self.append(FIND_LETTERS(REPLACE_TAGS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.YUVARLAK, _l.DUZ), _l.DAR, _l.GENIS)) + [_a['r']], 'GENIS')"
+        ]
+    },
+    {
+        "id": "genis_zaman_4_1",
+        "type": "GENIS",
+        "if": [
+            "self.type == _w.FIIL",
+            "self.check_applied(['GENIS'], 'allnotin')",
+            "CHECK_LETTER(self.letters[-1], [_l.SESSIZ])",
+            "len(self.vowels) == 1",
+            "self.letters[-1]['lower'] == 'l'",
+            "self.word() not in ['al', 'bil', 'bul', 'gel', 'kal', 'ol', 'öl']",
+            "self.applied[-1]['code'] not in ['OLUMSUZLUK', 'IMKANSIZLIK']"
+        ],
+        "do": [
+            "self.append(FIND_LETTERS(REPLACE_TAGS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.YUVARLAK, _l.DUZ), _l.DAR, _l.GENIS)) + [_a['r']], 'GENIS')"
+        ]
+    },
+    {
+        "id": "genis_zaman_4_2",
+        "type": "GENIS",
+        "if": [
+            "self.type == _w.FIIL",
+            "self.check_applied(['GENIS'], 'allnotin')",
+            "CHECK_LETTER(self.letters[-1], [_l.SESSIZ])",
+            "len(self.vowels) == 1",
+            "self.letters[-1]['lower'] == 'l'",
+            "self.word() in ['al', 'bil', 'bul', 'gel', 'kal', 'ol', 'öl']",
+            "self.applied[-1]['code'] not in ['OLUMSUZLUK', 'IMKANSIZLIK']"
+        ],
+        "do": [
+            "self.append(FIND_LETTERS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.GENIS, _l.DAR)) + [_a['r']], 'GENIS')"
+        ]
+    },
+    {
+        "id": "genis_zaman_5_1",
+        "type": "GENIS",
+        "if": [
+            "self.type == _w.FIIL",
+            "self.check_applied(['GENIS'], 'allnotin')",
+            "CHECK_LETTER(self.letters[-1], [_l.SESSIZ])",
+            "len(self.vowels) == 1",
+            "self.letters[-1]['lower'] == 'n'",
+            "self.word() != 'san'",
+            "'EDILGEN' not in [a['code'] for a in self.applied]",
+            "self.applied[-1]['code'] not in ['OLUMSUZLUK', 'IMKANSIZLIK']"
+        ],
+        "do": [
+            "self.append(FIND_LETTERS(REPLACE_TAGS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.YUVARLAK, _l.DUZ), _l.DAR, _l.GENIS)) + [_a['r']], 'GENIS')"
+        ]
+    },
+    {
+        "id": "genis_zaman_5_2",
+        "type": "GENIS",
+        "if": [
+            "self.type == _w.FIIL",
+            "self.check_applied(['GENIS'], 'allnotin')",
+            "CHECK_LETTER(self.letters[-1], [_l.SESSIZ])",
+            "len(self.vowels) == 1",
+            "self.letters[-1]['lower'] == 'n'",
+            "(self.word() == 'san' or 'EDILGEN' in [a['code'] for a in self.applied])",
+            "self.applied[-1]['code'] not in ['OLUMSUZLUK', 'IMKANSIZLIK']"
+        ],
+        "do": [
+            "self.append(FIND_LETTERS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.GENIS, _l.DAR)) + [_a['r']], 'GENIS')"
+        ]
+    },
+    {
+        "id": "genis_zaman_6_1",
+        "type": "GENIS",
+        "if": [
+            "self.type == _w.FIIL",
+            "self.check_applied(['GENIS'], 'allnotin')",
+            "CHECK_LETTER(self.letters[-1], [_l.SESSIZ])",
+            "len(self.vowels) == 1",
+            "self.letters[-1]['lower'] == 'r'",
+            "self.word() not in ['aşer', 'gör', 'dur', 'var', 'ver', 'vur']",
+            "self.applied[-1]['code'] not in ['OLUMSUZLUK', 'IMKANSIZLIK']"
+        ],
+        "do": [
+            "self.append(FIND_LETTERS(REPLACE_TAGS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.YUVARLAK, _l.DUZ), _l.DAR, _l.GENIS)) + [_a['r']], 'GENIS')"
+        ]
+    },
+    {
+        "id": "genis_zaman_6_2",
+        "type": "GENIS",
+        "if": [
+            "self.type == _w.FIIL",
+            "self.check_applied(['GENIS'], 'allnotin')",
+            "CHECK_LETTER(self.letters[-1], [_l.SESSIZ])",
+            "len(self.vowels) == 1",
+            "self.letters[-1]['lower'] == 'r'",
+            "self.word() in ['aşer', 'gör', 'dur', 'var', 'ver', 'vur']",
+            "self.applied[-1]['code'] not in ['OLUMSUZLUK', 'IMKANSIZLIK']"
+        ],
+        "do": [
+            "self.append(FIND_LETTERS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.GENIS, _l.DAR)) + [_a['r']], 'GENIS')"
+        ]
+    },
+    {
+        "id": "genis_zaman_7",
+        "type": "GENIS",
+        "if": [
+            "self.type == _w.FIIL",
+            "self.check_applied(['GENIS'], 'allnotin')",
+            "self.applied[-1]['code'] in ['OLUMSUZLUK', 'IMKANSIZLIK']"
+        ],
+        "do": [
+            "self.append([], 'GENIS')"
+        ]
+    },
+    {
+        "id": "bilinen_gecmis_zaman",
+        "type": "BILINENGECMIS",
+        "if": [
+            "self.type == _w.FIIL"
+        ],
+        "do": [
+            "self.append([_a['d']] + FIND_LETTERS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.GENIS, _l.DAR)), 'BILINENGECMIS')"
+        ]
+    },
+    {
+        "id": "duyulan_gecmis_zaman",
+        "type": "DUYULANGECMIS",
+        "if": [
+            "self.type == _w.FIIL"
+        ],
+        "do": [
+            "self.append([_a['m']] + FIND_LETTERS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.GENIS, _l.DAR)) + [_a['ş']], 'DUYULANGECMIS')"
+        ]
+    },
+    {
+        "id": "yeterlilik_1",
+        "type": "YETERLILIK",
+        "if": [
+            "self.type == _w.FIIL",
+            "self.check_applied(['YETERLILIK', 'IMKANSIZLIK', 'OLUMSUZIHTIMAL', 'OLUMSUZBELIRSIZLIK'], 'allnotin')",
+            "CHECK_LETTER(self.letters[-1], [_l.SESSIZ])"
+
+        ],
+        "do": [
+            "self.append(FIND_LETTERS(REPLACE_TAGS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.YUVARLAK, _l.DUZ), _l.DAR, _l.GENIS)) + [_a['b'], _a['i'], _a['l']], 'YETERLILIK')"
+        ]
+    },
+    {
+        "id": "yeterlilik_2",
+        "type": "YETERLILIK",
+        "if": [
+            "self.type == _w.FIIL",
+            "self.check_applied(['YETERLILIK', 'IMKANSIZLIK', 'OLUMSUZIHTIMAL', 'OLUMSUZBELIRSIZLIK'], 'allnotin')",
+            "(CHECK_LETTER(self.letters[-1], [_l.SESLI, _l.KALIN]) or (CHECK_LETTER(self.letters[-1], [_l.SESLI, _l.INCE]) and len(self.vowels) >= 2))"
+
+        ],
+        "do": [
+            "self.append([_a['y']], 'KAYNASTIRMA')",
+            "self.append(FIND_LETTERS(REPLACE_TAGS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.YUVARLAK, _l.DUZ), _l.DAR, _l.GENIS)) + [_a['b'], _a['i'], _a['l']], 'YETERLILIK')"
+        ]
+    },
+    {
+        "id": "yeterlilik_3",
+        "type": "YETERLILIK",
+        "if": [
+            "self.type == _w.FIIL",
+            "self.check_applied(['YETERLILIK', 'IMKANSIZLIK', 'OLUMSUZIHTIMAL', 'OLUMSUZBELIRSIZLIK'], 'allnotin')",
+            "CHECK_LETTER(self.letters[-1], [_l.SESLI, _l.INCE])",
+            "len(self.vowels) == 1"
+
+        ],
+        "do": [
+            "self.replace(len(self.letters) - 1, _a['i'], 'UNLUDARALMASI')",
+            "self.append([_a['y']], 'KAYNASTIRMA')",
+            "self.append(FIND_LETTERS(REPLACE_TAGS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.YUVARLAK, _l.DUZ), _l.DAR, _l.GENIS)) + [_a['b'], _a['i'], _a['l']], 'YETERLILIK')"
+        ]
+    },
+    {
+        "id": "imkansizlik_1",
+        "type": "IMKANSIZLIK",
+        "if": [
+            "self.type == _w.FIIL",
+            "self.check_applied(['YETERLILIK', 'IMKANSIZLIK', 'OLUMSUZIHTIMAL', 'OLUMSUZBELIRSIZLIK'], 'allnotin')",
+            "CHECK_LETTER(self.letters[-1], [_l.SESSIZ])"
+
+        ],
+        "do": [
+            "self.append(FIND_LETTERS(REPLACE_TAGS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.YUVARLAK, _l.DUZ), _l.DAR, _l.GENIS)) + [_a['m']] + FIND_LETTERS(REPLACE_TAGS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.YUVARLAK, _l.DUZ), _l.DAR, _l.GENIS)), 'IMKANSIZLIK')"
+        ]
+    },
+    {
+        "id": "imkansizlik_2",
+        "type": "IMKANSIZLIK",
+        "if": [
+            "self.type == _w.FIIL",
+            "self.check_applied(['YETERLILIK', 'IMKANSIZLIK', 'OLUMSUZIHTIMAL', 'OLUMSUZBELIRSIZLIK'], 'allnotin')",
+            "(CHECK_LETTER(self.letters[-1], [_l.SESLI, _l.KALIN]) or (CHECK_LETTER(self.letters[-1], [_l.SESLI, _l.INCE]) and len(self.vowels) >= 2))"
+
+        ],
+        "do": [
+            "self.append([_a['y']], 'KAYNASTIRMA')",
+            "self.append(FIND_LETTERS(REPLACE_TAGS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.YUVARLAK, _l.DUZ), _l.DAR, _l.GENIS)) + [_a['m']] + FIND_LETTERS(REPLACE_TAGS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.YUVARLAK, _l.DUZ), _l.DAR, _l.GENIS)), 'IMKANSIZLIK')"
+        ]
+    },
+    {
+        "id": "imkansizlik_3",
+        "type": "IMKANSIZLIK",
+        "if": [
+            "self.type == _w.FIIL",
+            "self.check_applied(['YETERLILIK', 'IMKANSIZLIK', 'OLUMSUZIHTIMAL', 'OLUMSUZBELIRSIZLIK'], 'allnotin')",
+            "CHECK_LETTER(self.letters[-1], [_l.SESLI, _l.INCE])",
+            "len(self.vowels) == 1"
+
+        ],
+        "do": [
+            "self.replace(len(self.letters) - 1, _a['i'], 'UNLUDARALMASI')",
+            "self.append([_a['y']], 'KAYNASTIRMA')",
+            "self.append(FIND_LETTERS(REPLACE_TAGS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.YUVARLAK, _l.DUZ), _l.DAR, _l.GENIS)) + [_a['m']] + FIND_LETTERS(REPLACE_TAGS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.YUVARLAK, _l.DUZ), _l.DAR, _l.GENIS)), 'IMKANSIZLIK')"
+        ]
+    },
+    {
+        "id": "birinci_tekil_1",
+        "type": "BIRINCITEKIL",
+        "if": [
+            "self.type == _w.FIIL",
+            "len([a for a in self.applied if a['code'].endswith('TEKIL') or a['code'].endswith('COGUL')]) == 0",
+            "(self.applied[-1]['code'] in ['SIMDIKI_YOR', 'GELECEK', 'DUYULANGECMIS'] or (self.applied[-1]['code'] == 'GENIS' and self.check_applied(['OLUMSUZLUK', 'IMKANSIZLIK'], 'allnotin')))",
+            "CHECK_LETTER(self.letters[-1], [_l.SESSIZ])"
+        ],
+        "do": [
+            "self.append(FIND_LETTERS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.GENIS, _l.DAR)) + [_a['m']], 'BIRINCITEKIL')"
+        ]
+    },
+    {
+        "id": "birinci_tekil_2",
+        "type": "BIRINCITEKIL",
+        "if": [
+            "self.type == _w.FIIL",
+            "len([a for a in self.applied if a['code'].endswith('TEKIL') or a['code'].endswith('COGUL')]) == 0",
+            "(self.applied[-1]['code'] == 'BILINENGECMIS' or (self.applied[-1]['code'] == 'GENIS' and self.check_applied(['OLUMSUZLUK', 'IMKANSIZLIK'], 'anyin')))",
+            "CHECK_LETTER(self.letters[-1], [_l.SESLI])"
+        ],
+        "do": [
+            "self.append([_a['m']], 'BIRINCITEKIL')"
+        ]
+    },
+    {
+        "id": "birinci_tekil_3",
+        "type": "BIRINCITEKIL",
+        "if": [
+            "self.type == _w.FIIL",
+            "len([a for a in self.applied if a['code'].endswith('TEKIL') or a['code'].endswith('COGUL')]) == 0",
+            "self.applied[-1]['code'] == 'SIMDIKI_MAKTA'",
+            "CHECK_LETTER(self.letters[-1], [_l.SESLI])"
+        ],
+        "do": [
+            "self.append([_a['y']], 'KAYNASTIRMA')",
+            "self.append(FIND_LETTERS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.GENIS, _l.DAR)) + [_a['m']], 'BIRINCITEKIL')"
+        ]
+    },
+    {
+        "id": "ikinci_tekil_1",
+        "type": "IKINCITEKIL",
+        "if": [
+            "self.type == _w.FIIL",
+            "len([a for a in self.applied if a['code'].endswith('TEKIL') or a['code'].endswith('COGUL')]) == 0",
+            "(self.applied[-1]['code'] in ['SIMDIKI_YOR', 'SIMDIKI_MAKTA', 'GELECEK', 'DUYULANGECMIS'] or (self.applied[-1]['code'] == 'GENIS' and self.check_applied(['OLUMSUZLUK', 'IMKANSIZLIK'], 'allnotin')))"
+        ],
+        "do": [
+            "self.append([_a['s']] + FIND_LETTERS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.GENIS, _l.DAR)) + [_a['n']], 'IKINCITEKIL')"
+        ]
+    },
+    {
+        "id": "ikinci_tekil_2",
+        "type": "IKINCITEKIL",
+        "if": [
+            "self.type == _w.FIIL",
+            "len([a for a in self.applied if a['code'].endswith('TEKIL') or a['code'].endswith('COGUL')]) == 0",
+            "self.applied[-1]['code'] == 'BILINENGECMIS'",
+            "CHECK_LETTER(self.letters[-1], [_l.SESLI])"
+        ],
+        "do": [
+            "self.append([_a['n']], 'IKINCITEKIL')"
+        ]
+    },
+    {
+        "id": "ikinci_tekil_3",
+        "type": "IKINCITEKIL",
+        "if": [
+            "self.type == _w.FIIL",
+            "len([a for a in self.applied if a['code'].endswith('TEKIL') or a['code'].endswith('COGUL')]) == 0",
+            "self.applied[-1]['code'] == 'GENIS' and self.check_applied(['OLUMSUZLUK', 'IMKANSIZLIK'], 'anyin')",
+            "CHECK_LETTER(self.letters[-1], [_l.SESLI])"
+        ],
+        "do": [
+            "self.append([_a['z'], _a['s']] + FIND_LETTERS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.GENIS, _l.DAR)) + [_a['n']], 'IKINCITEKIL')"
+        ]
+    },
+    {
+        "id": "ucuncu_tekil_1",
+        "type": "UCUNCUTEKIL",
+        "if": [
+            "self.type == _w.FIIL",
+            "len([a for a in self.applied if a['code'].endswith('TEKIL') or a['code'].endswith('COGUL')]) == 0",
+            "(self.applied[-1]['code'] in ['SIMDIKI_YOR', 'SIMDIKI_MAKTA', 'GELECEK', 'BILINENGECMIS', 'DUYULANGECMIS'] or (self.applied[-1]['code'] == 'GENIS' and self.check_applied(['OLUMSUZLUK', 'IMKANSIZLIK'], 'allnotin')))"
+        ],
+        "do": [
+            "self.append([], 'UCUNCUTEKIL')"
+        ]
+    },
+    {
+        "id": "ucuncu_tekil_2",
+        "type": "UCUNCUTEKIL",
+        "if": [
+            "self.type == _w.FIIL",
+            "len([a for a in self.applied if a['code'].endswith('TEKIL') or a['code'].endswith('COGUL')]) == 0",
+            "self.applied[-1]['code'] == 'GENIS' and self.check_applied(['OLUMSUZLUK', 'IMKANSIZLIK'], 'anyin')",
+            "CHECK_LETTER(self.letters[-1], [_l.SESLI])"
+        ],
+        "do": [
+            "self.append([_a['z']], 'UCUNCUTEKIL')"
+        ]
+    },
+    {
+        "id": "birinci_cogul_1",
+        "type": "BIRINCICOGUL",
+        "if": [
+            "self.type == _w.FIIL",
+            "len([a for a in self.applied if a['code'].endswith('TEKIL') or a['code'].endswith('COGUL')]) == 0",
+            "(self.applied[-1]['code'] in ['SIMDIKI_YOR', 'GELECEK', 'DUYULANGECMIS'] or (self.applied[-1]['code'] == 'GENIS' and self.check_applied(['OLUMSUZLUK', 'IMKANSIZLIK'], 'allnotin')))",
+            "CHECK_LETTER(self.letters[-1], [_l.SESSIZ])"
+        ],
+        "do": [
+            "self.append(FIND_LETTERS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.GENIS, _l.DAR)) + [_a['z']], 'BIRINCICOGUL')"
+        ]
+    },
+    {
+        "id": "birinci_cogul_2",
+        "type": "BIRINCICOGUL",
+        "if": [
+            "self.type == _w.FIIL",
+            "len([a for a in self.applied if a['code'].endswith('TEKIL') or a['code'].endswith('COGUL')]) == 0",
+            "self.applied[-1]['code'] == 'BILINENGECMIS'",
+            "CHECK_LETTER(self.letters[-1], [_l.SESLI])"
+        ],
+        "do": [
+            "self.append([_a['k']], 'BIRINCICOGUL')"
+        ]
+    },
+    {
+        "id": "birinci_cogul_3",
+        "type": "BIRINCICOGUL",
+        "if": [
+            "self.type == _w.FIIL",
+            "len([a for a in self.applied if a['code'].endswith('TEKIL') or a['code'].endswith('COGUL')]) == 0",
+            "(self.applied[-1]['code'] == 'SIMDIKI_MAKTA' or (self.applied[-1]['code'] == 'GENIS' and self.check_applied(['OLUMSUZLUK', 'IMKANSIZLIK'], 'anyin')))",
+            "CHECK_LETTER(self.letters[-1], [_l.SESLI])"
+        ],
+        "do": [
+            "self.append([_a['y']], 'KAYNASTIRMA')",
+            "self.append(FIND_LETTERS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.GENIS, _l.DAR)) + [_a['z']], 'BIRINCICOGUL')"
+        ]
+    },
+    {
+        "id": "ikinci_cogul_1",
+        "type": "IKINCICOGUL",
+        "if": [
+            "self.type == _w.FIIL",
+            "len([a for a in self.applied if a['code'].endswith('TEKIL') or a['code'].endswith('COGUL')]) == 0",
+            "(self.applied[-1]['code'] in ['SIMDIKI_YOR', 'SIMDIKI_MAKTA', 'GELECEK', 'DUYULANGECMIS'] or (self.applied[-1]['code'] == 'GENIS' and self.check_applied(['OLUMSUZLUK', 'IMKANSIZLIK'], 'allnotin')))"
+        ],
+        "do": [
+            "self.append([_a['s']] + FIND_LETTERS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.GENIS, _l.DAR)) + [_a['n']] + FIND_LETTERS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.GENIS, _l.DAR)) + [_a['z']], 'IKINCICOGUL')"
+        ]
+    },
+    {
+        "id": "ikinci_cogul_2",
+        "type": "IKINCICOGUL",
+        "if": [
+            "self.type == _w.FIIL",
+            "len([a for a in self.applied if a['code'].endswith('TEKIL') or a['code'].endswith('COGUL')]) == 0",
+            "self.applied[-1]['code'] == 'BILINENGECMIS'",
+            "CHECK_LETTER(self.letters[-1], [_l.SESLI])"
+        ],
+        "do": [
+            "self.append([_a['n']] + FIND_LETTERS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.GENIS, _l.DAR)) + [_a['z']], 'IKINCICOGUL')"
+        ]
+    },
+    {
+        "id": "ikinci_cogul_3",
+        "type": "IKINCICOGUL",
+        "if": [
+            "self.type == _w.FIIL",
+            "len([a for a in self.applied if a['code'].endswith('TEKIL') or a['code'].endswith('COGUL')]) == 0",
+            "self.applied[-1]['code'] == 'GENIS' and self.check_applied(['OLUMSUZLUK', 'IMKANSIZLIK'], 'anyin')",
+            "CHECK_LETTER(self.letters[-1], [_l.SESLI])"
+        ],
+        "do": [
+            "self.append([_a['z'], _a['s']] + FIND_LETTERS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.GENIS, _l.DAR)) + [_a['n']] + FIND_LETTERS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.GENIS, _l.DAR)) + [_a['z']], 'IKINCICOGUL')"
+        ]
+    },
+    {
+        "id": "ucuncu_cogul_1",
+        "type": "UCUNCUCOGUL",
+        "if": [
+            "self.type == _w.FIIL",
+            "len([a for a in self.applied if a['code'].endswith('TEKIL') or a['code'].endswith('COGUL')]) == 0",
+            "(self.applied[-1]['code'] in ['SIMDIKI_YOR', 'SIMDIKI_MAKTA', 'GELECEK', 'BILINENGECMIS', 'DUYULANGECMIS'] or (self.applied[-1]['code'] == 'GENIS' and self.check_applied(['OLUMSUZLUK', 'IMKANSIZLIK'], 'allnotin')))"
+        ],
+        "do": [
+            "self.append([_a['l']] + FIND_LETTERS(REPLACE_TAGS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.YUVARLAK, _l.DUZ), _l.DAR, _l.GENIS)) + [_a['r']], 'UCUNCUCOGUL')"
+        ]
+    },
+    {
+        "id": "ucuncu_cogul_2",
+        "type": "UCUNCUCOGUL",
+        "if": [
+            "self.type == _w.FIIL",
+            "len([a for a in self.applied if a['code'].endswith('TEKIL') or a['code'].endswith('COGUL')]) == 0",
+            "self.applied[-1]['code'] == 'GENIS' and self.check_applied(['OLUMSUZLUK', 'IMKANSIZLIK'], 'anyin')",
+            "CHECK_LETTER(self.letters[-1], [_l.SESLI])"
+        ],
+        "do": [
+            "self.append([_a['z'], _a['l'], self.vowels[-1], _a['r']], 'UCUNCUCOGUL')"
+        ]
+    },
+    {
+        "id": "olumsuzluk",
+        "type": "OLUMSUZLUK",
+        "if": [
+            "self.type == _w.FIIL",
+            "'OLUMSUZLUK' not in [a['code'] for a in self.applied]"
+        ],
+        "do": [
+            "self.append([_a['m']] + FIND_LETTERS(REPLACE_TAGS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.YUVARLAK, _l.DUZ), _l.DAR, _l.GENIS)), 'OLUMSUZLUK')"
+        ]
+    },
+    {
+        "id": "mastar",
+        "type": "MASTAR",
+        "if": [
+            "self.type == _w.FIIL"
+        ],
+        "do": [
+            "self.append([_a['m']] + FIND_LETTERS(REPLACE_TAGS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.YUVARLAK, _l.DUZ), _l.DAR, _l.GENIS)) + [_a['k']], 'MASTAR')"
+        ]
+    },
+    {
+        "id": "unsuz_yumusamasi_fiil_t",
+        "type": "_APPEND",
+        "if": [
+            "self.type == _w.FIIL",
+            "(self.word() == 'tat' or self.word() == 'git' or self.word().endswith('et'))",
+            "self.word() != 'üret'",
+            "CHECK_LETTER(self.suffix[0], [_l.SESLI])"
+        ],
+        "do": [
+            "self.replace(len(self.letters) - 1, _a['d'], 'UNSUZYUMUSAMASI')"
+        ]
+    },
+    {
+        "id": "unsuz_yumusamasi_fiil_k",
+        "type": "_APPEND",
+        "if": [
+            "self.type == _w.FIIL",
+            "CHECK_LETTER(self.suffix[0], [_l.SESLI])",
+            "self.letters[-1]['lower'] == 'k'",
+            "len(self.applied) > 0 and self.applied[-1]['code'] == 'GELECEK'"
+        ],
+        "do": [
+            "self.replace(len(self.letters) - 1, _a['ğ'], 'UNSUZYUMUSAMASI')"
+        ]
+    },
+    {
+        "id": "unsuz_yumusamasi_isim_t",
+        "type": "_APPEND",
+        "if": [
+            "self.type == _w.ISIM",
+            "CHECK_LETTER(self.suffix[0], [_l.SESLI])",
+            "self.letters[-1]['lower'] == 't'"
+        ],
+        "do": [
+            "self.replace(len(self.letters) - 1, _a['d'], 'UNSUZYUMUSAMASI')"
+        ]
+    },
+    {
+        "id": "unsuz_sertlesmesi_fiil_d",
+        "type": "_APPEND",
+        "if": [
+            "self.type == _w.FIIL",
+            "CHECK_LETTER(self.letters[-1], [_l.SESSIZ, _l.SERT])",
+            "self.suffix[0]['lower'] == 'd'"
+        ],
+        "do": [
+            "self.replace_suffix(0, _a['t'], 'UNSUZSERTLESMESI')"
+        ]
+    }
+]

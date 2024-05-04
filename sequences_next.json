@@ -1,0 +1,14 @@
+[
+    {
+        "if": "self.type == _w.FIIL",
+        "seq": ["_c.TEZLIK", "_t", "_p"]
+    },
+    {
+        "if": "self.type == _w.FIIL",
+        "seq": ["_o.OLUMSUZLUK", "_c.TEZLIK", "_t", "_p"]
+    },
+    {
+        "if": "self.type == _w.FIIL",
+        "seq": ["_c.TEZLIK", "_o.OLUMSUZLUK"]
+    }
+]

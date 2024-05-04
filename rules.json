@@ -166,17 +166,45 @@
         ]
     },
     {
-        "id": "bilinen_gecmis_zaman",
+        "id": "bilinen_gecmis_zaman_1",
         "type": "BILINENGECMIS",
+        "if": [
+            "(self.check_applied(['GENIS'], 'notin', -1) or self.check_applied(['OLUMSUZLUK'], 'notin', -2))"
+        ],
         "do": [
             "self.append([_a['d']] + FIND_LETTERS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.GENIS, _l.DAR)), 'BILINENGECMIS')"
         ]
     },
     {
-        "id": "duyulan_gecmis_zaman",
+        "id": "bilinen_gecmis_zaman_2",
+        "type": "BILINENGECMIS",
+        "if": [
+            "self.check_applied(['GENIS'], 'in', -1)",
+            "self.check_applied(['OLUMSUZLUK'], 'in', -2)"
+        ],
+        "do": [
+            "self.append([_a['z'], _a['d']] + FIND_LETTERS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.GENIS, _l.DAR)), 'BILINENGECMIS')"
+        ]
+    },
+    {
+        "id": "duyulan_gecmis_zaman_1",
         "type": "DUYULANGECMIS",
+        "if": [
+            "(self.check_applied(['GENIS'], 'notin', -1) or self.check_applied(['OLUMSUZLUK'], 'notin', -2))"
+        ],
         "do": [
             "self.append([_a['m']] + FIND_LETTERS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.GENIS, _l.DAR)) + [_a['ş']], 'DUYULANGECMIS')"
+        ]
+    },
+    {
+        "id": "duyulan_gecmis_zaman_2",
+        "type": "DUYULANGECMIS",
+        "if": [
+            "self.check_applied(['GENIS'], 'in', -1)",
+            "self.check_applied(['OLUMSUZLUK'], 'in', -2)"
+        ],
+        "do": [
+            "self.append([_a['z'], _a['m']] + FIND_LETTERS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.GENIS, _l.DAR)) + [_a['ş']], 'DUYULANGECMIS')"
         ]
     },
     {
@@ -194,10 +222,45 @@
         ]
     },
     {
+        "id": "tezlik",
+        "type": "TEZLIK",
+        "do": [
+            "self.append(FIND_LETTERS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.GENIS, _l.DAR)) + [_a['v'], _a['e'], _a['r']], 'TEZLIK')"
+        ]
+    },
+    {
+        "id": "gereklilik",
+        "type": "GEREKLILIK",
+        "do": [
+            "self.append([_a['m']] + FIND_LETTERS(REPLACE_TAGS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.YUVARLAK, _l.DUZ), _l.DAR, _l.GENIS)) + [_a['l']] + FIND_LETTERS(REPLACE_TAGS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.YUVARLAK, _l.DUZ), _l.GENIS, _l.DAR)), 'GEREKLILIK')"
+        ]
+    },
+    {
+        "id": "sart_kipi_1",
+        "type": "SARTKIPI",
+        "if": [
+            "(self.check_applied(['GENIS'], 'notin', -1) or self.check_applied(['OLUMSUZLUK'], 'notin', -2))"
+        ],
+        "do": [
+            "self.append([_a['s']] + FIND_LETTERS(REPLACE_TAGS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.YUVARLAK, _l.DUZ), _l.DAR, _l.GENIS)), 'SARTKIPI')"
+        ]
+    },
+    {
+        "id": "sart_kipi_2",
+        "type": "SARTKIPI",
+        "if": [
+            "self.check_applied(['GENIS'], 'in', -1)",
+            "self.check_applied(['OLUMSUZLUK'], 'in', -2)"
+        ],
+        "do": [
+            "self.append([_a['z'], _a['s']] + FIND_LETTERS(REPLACE_TAGS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.YUVARLAK, _l.DUZ), _l.DAR, _l.GENIS)), 'SARTKIPI')"
+        ]
+    },
+    {
         "id": "birinci_tekil_1",
         "type": "BIRINCITEKIL",
         "if": [
-            "(self.check_applied(['GENIS', 'BILINENGECMIS'], 'notin', -1) or (self.check_applied(['GENIS'], 'in', -1) and self.check_applied(['OLUMSUZLUK'], 'notin', -2)))"
+            "(self.check_applied(['GENIS', 'BILINENGECMIS', 'SARTKIPI'], 'notin', -1) or (self.check_applied(['GENIS'], 'in', -1) and self.check_applied(['OLUMSUZLUK'], 'notin', -2)))"
         ],
         "do": [
             "self.append(FIND_LETTERS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.GENIS, _l.DAR)) + [_a['m']], 'BIRINCITEKIL')"
@@ -207,7 +270,7 @@
         "id": "birinci_tekil_2",
         "type": "BIRINCITEKIL",
         "if": [
-            "(self.check_applied(['BILINENGECMIS'], 'in', -1) or (self.check_applied(['GENIS'], 'in', -1) and self.check_applied(['OLUMSUZLUK'], 'in', -2)))",
+            "(self.check_applied(['BILINENGECMIS', 'SARTKIPI'], 'in', -1) or (self.check_applied(['GENIS'], 'in', -1) and self.check_applied(['OLUMSUZLUK'], 'in', -2)))",
             "CHECK_LETTER(self.letters[-1], [_l.SESLI])"
         ],
         "do": [
@@ -218,7 +281,7 @@
         "id": "ikinci_tekil_1",
         "type": "IKINCITEKIL",
         "if": [
-            "(self.check_applied(['GENIS', 'BILINENGECMIS'], 'notin', -1) or (self.check_applied(['GENIS'], 'in', -1) and self.check_applied(['OLUMSUZLUK'], 'notin', -2)))"
+            "(self.check_applied(['GENIS', 'BILINENGECMIS', 'SARTKIPI'], 'notin', -1) or (self.check_applied(['GENIS'], 'in', -1) and self.check_applied(['OLUMSUZLUK'], 'notin', -2)))"
         ],
         "do": [
             "self.append([_a['s']] + FIND_LETTERS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.GENIS, _l.DAR)) + [_a['n']], 'IKINCITEKIL')"
@@ -228,7 +291,7 @@
         "id": "ikinci_tekil_2",
         "type": "IKINCITEKIL",
         "if": [
-            "self.check_applied(['BILINENGECMIS'], 'in', -1)"
+            "self.check_applied(['BILINENGECMIS', 'SARTKIPI'], 'in', -1)"
         ],
         "do": [
             "self.append([_a['n']], 'IKINCITEKIL')"
@@ -268,7 +331,7 @@
         "id": "birinci_cogul_1",
         "type": "BIRINCICOGUL",
         "if": [
-            "self.check_applied(['BILINENGECMIS'], 'notin', -1)"
+            "self.check_applied(['BILINENGECMIS', 'SARTKIPI'], 'notin', -1)"
         ],
         "do": [
             "self.append(FIND_LETTERS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.GENIS, _l.DAR)) + [_a['z']], 'BIRINCICOGUL')"
@@ -278,7 +341,7 @@
         "id": "birinci_cogul_2",
         "type": "BIRINCICOGUL",
         "if": [
-            "self.check_applied(['BILINENGECMIS'], 'in', -1)"
+            "self.check_applied(['BILINENGECMIS', 'SARTKIPI'], 'in', -1)"
         ],
         "do": [
             "self.append([_a['k']], 'BIRINCICOGUL')"
@@ -288,7 +351,7 @@
         "id": "ikinci_cogul_1",
         "type": "IKINCICOGUL",
         "if": [
-            "(self.check_applied(['GENIS', 'BILINENGECMIS'], 'notin', -1) or (self.check_applied(['GENIS'], 'in', -1) and self.check_applied(['OLUMSUZLUK'], 'notin', -2)))"
+            "(self.check_applied(['GENIS', 'BILINENGECMIS', 'SARTKIPI'], 'notin', -1) or (self.check_applied(['GENIS'], 'in', -1) and self.check_applied(['OLUMSUZLUK'], 'notin', -2)))"
         ],
         "do": [
             "self.append([_a['s']] + FIND_LETTERS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.GENIS, _l.DAR)) + [_a['n']] + FIND_LETTERS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.GENIS, _l.DAR)) + [_a['z']], 'IKINCICOGUL')"
@@ -298,7 +361,7 @@
         "id": "ikinci_cogul_2",
         "type": "IKINCICOGUL",
         "if": [
-            "self.check_applied(['BILINENGECMIS'], 'in', -1)"
+            "self.check_applied(['BILINENGECMIS', 'SARTKIPI'], 'in', -1)"
         ],
         "do": [
             "self.append([_a['n']] + FIND_LETTERS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.GENIS, _l.DAR)) + [_a['z']], 'IKINCICOGUL')"
@@ -352,12 +415,25 @@
         ]
     },
     {
-        "id": "kaynastirma_y",
+        "id": "kaynastirma_y_1",
         "type": "_APPEND",
         "if": [
             "self.type == _w.FIIL",
             "CHECK_LETTER(self.letters[-1], [_l.SESLI])",
             "CHECK_LETTER(self._suffix[0][0], [_l.SESLI])"
+        ],
+        "do": [
+            "self.append([_a['y']], 'KAYNASTIRMA', self._suffix)"
+        ]
+    },
+    {
+        "id": "kaynastirma_y_2",
+        "type": "_APPEND",
+        "if": [
+            "self.type == _w.FIIL",
+            "CHECK_LETTER(self.letters[-1], [_l.SESLI])",
+            "self.check_applied(['GEREKLILIK', 'BILINENGECMIS', 'SARTKIPI', 'SIMDIKI_MAKTA'], 'in', -1)",
+            "self._suffix[1] in ['BILINENGECMIS', 'DUYULANGECMIS', 'SARTKIPI']"
         ],
         "do": [
             "self.append([_a['y']], 'KAYNASTIRMA', self._suffix)"

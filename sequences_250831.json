@@ -1,0 +1,14 @@
+[
+    {"seq": ["_o.OLUMSUZLUK?", "_t", "_p"]},
+    {"seq": ["_o.OLUMSUZLUK?", "_c.YETERLILIK", "_t", "_p"]},
+    {"seq": ["_o.OLUMSUZLUK?", ["_o.GEREKLILIK", "_o.SARTKIPI"], "_p"]},
+    {"seq": ["_o.OLUMSUZLUK?", "_t", "_o.SARTKIPI", "_p"]},
+    {"seq": ["_c.BIRLESIKFIIL", "_o.OLUMSUZLUK", "_c.YETERLILIK?", "_t", "_p"]},
+    {"seq": ["_o.OLUMSUZLUK?", "_t", ["_t.DUYULANGECMIS", "_t.BILINENGECMIS"], "_p"]},
+    {"seq": ["_o.OLUMSUZLUK?", "_o.SARTKIPI", ["_t.DUYULANGECMIS", "_t.BILINENGECMIS"], "_p"]},
+    {"seq": ["_o.OLUMSUZLUK?", "_o.GEREKLILIK", ["_t.DUYULANGECMIS", "_t.BILINENGECMIS"], "_p"]},
+    {"seq": ["_o.OLUMSUZLUK?", "_o.GEREKLILIK", "_o.SARTKIPI", "_p"]},
+    {"seq": ["_o.OLUMSUZLUK?", ["_t.SIMDIKI_YOR", "_t.SIMDIKI_MAKTA"], "_p", "_o.HABEREDADI"]},
+    {"seq": ["_o.OLUMSUZLUK?", ["_t.DUYULANGECMIS", "_t.GELECEK"], "_p", "_o.HABEREDADI"]},
+    {"seq": ["_o.OLUMSUZLUK?", ["_o.GEREKLILIK"], "_p", "_o.HABEREDADI"]}
+]

@@ -1,0 +1,7 @@
+[
+    {"id": "seq001", "seq": [["_", "_o.OLUMSUZLUK", "_c.BIRLESIKFIIL; _o.OLUMSUZLUK"], ["_", "_c.YETERLILIK"], "_t", "_p"]},
+    {"id": "seq002", "seq": [["_", "_o.OLUMSUZLUK", "_c.BIRLESIKFIIL; _o.OLUMSUZLUK"], ["_o.GEREKLILIK", "_o.SARTKIPI"], "_p"]},
+    {"id": "seq003", "seq": [["_", "_o.OLUMSUZLUK", "_c.BIRLESIKFIIL; _o.OLUMSUZLUK"], ["_t", "_o.GEREKLILIK"], ["_o.SARTKIPI", "_t.DUYULANGECMIS", "_t.BILINENGECMIS"], "_p"]},
+    {"id": "seq004", "seq": [["_", "_o.OLUMSUZLUK", "_c.BIRLESIKFIIL; _o.OLUMSUZLUK"], "_o.SARTKIPI", ["_t.DUYULANGECMIS", "_t.BILINENGECMIS"], "_p"]},
+    {"id": "seq005", "seq": [["_", "_o.OLUMSUZLUK", "_c.BIRLESIKFIIL; _o.OLUMSUZLUK"], ["_t.SIMDIKI_YOR", "_t.SIMDIKI_MAKTA", "_t.DUYULANGECMIS", "_t.GELECEK", "_o.GEREKLILIK"], "_p", "_o.HABEREDADI"]}
+]

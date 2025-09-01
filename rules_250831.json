@@ -257,6 +257,37 @@
         ]
     },
     {
+        "id": "edilgen_n_1",
+        "type": "EDILGEN",
+        "if": [
+            "CHECK_LETTER(self.letters[-1], 'l')"
+        ],
+        "do": [
+            "self.append(FIND_LETTERS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.GENIS, _l.DAR)) + [_a['n']], 'EDILGEN')"
+        ]
+    },
+    {
+        "id": "edilgen_n_2",
+        "type": "EDILGEN",
+        "if": [
+            "CHECK_LETTER(self.letters[-1], [_l.SESLI])"
+        ],
+        "do": [
+            "self.append([_a['n']], 'EDILGEN')"
+        ]
+    },
+    {
+        "id": "edilgen_l",
+        "type": "EDILGEN",
+        "if": [
+            "CHECK_LETTER(self.letters[-1], [_l.SESSIZ])",
+            "not CHECK_LETTER(self.letters[-1], 'l')"
+        ],
+        "do": [
+            "self.append(FIND_LETTERS(REPLACE_TAGS(self.vowels[-1]['tags'], _l.GENIS, _l.DAR)) + [_a['l']], 'EDILGEN')"
+        ]
+    },
+    {
         "id": "haber_edadi",
         "type": "HABEREDADI",
         "do": [
@@ -478,7 +509,7 @@
         "if": [
             "self.type == _w.FIIL",
             "(self.word() == 'tat' or self.word() == 'git' or self.word().endswith('et'))",
-            "self.word() != 'üret'",
+            "self.word() != 'üret' and self.word() != 'türet'",
             "CHECK_LETTER(self._suffix[0][0], [_l.SESLI])"
         ],
         "do": [
@@ -520,6 +551,18 @@
         ],
         "do": [
             "self.replace_suffix(0, _a['t'], 'UNSUZSERTLESMESI')"
+        ]
+    },
+    {
+        "id": "unlu_dusmesi_fiil",
+        "type": "_APPEND",
+        "if": [
+            "self.type == _w.FIIL",
+            "self._suffix[1] in ['EDILGEN']",
+            "self.word() in ['ayır', 'evir', 'çevir', 'devir']"
+        ],
+        "do": [
+            "self.remove(len(self.letters) - 2, 'UNLUDARALMASI')"
         ]
     }
 ]

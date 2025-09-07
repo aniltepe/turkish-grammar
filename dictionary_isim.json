@@ -1,0 +1,6 @@
+[
+    {"word": "an",               "tags": ["_w.ISIM"]},
+    {"word": "ekmek",            "tags": ["_w.ISIM"]},
+    {"word": "tin",              "tags": ["_w.ISIM"]},
+    {"word": "yiyecek",          "tags": ["_w.ISIM"], "roots": [{"word": "yemek", "tag": "_w.FIIL"}]}
+]
